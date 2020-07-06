@@ -16,6 +16,10 @@ public class NotificationData {
      */
     public final String packageName;
     /**
+     * The channel of the notifications. For API versions that do not support it, always null.
+     */
+    public final String channelId;
+    /**
      * The time when notification has been found
      */
     public final long foundAtTime;
@@ -24,9 +28,10 @@ public class NotificationData {
      */
     public final int flags;
 
-    public NotificationData(String id, String packageName, long foundAtTime, int flags) {
+    public NotificationData(String id, String packageName, String channelId, long foundAtTime, int flags) {
         this.id = id;
         this.packageName = packageName;
+        this.channelId = channelId;
         this.foundAtTime = foundAtTime;
         this.flags = flags;
     }

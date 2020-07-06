@@ -636,6 +636,13 @@ public class ReminderNotificationListenerService extends AbstractReminderNotific
             if (!mInitializing) {
                 mEventBus.send(new NotificationsUpdatedEvent(getNotificationsData()));
             }
+            // TODO: Check not only that selected application matches the package name, but also
+            // that the channel ID matches if one is specified by the user. This will require
+            // changing the type of the selectedApplications to Map<String, List<String>>. Here,
+            // keys are package names and values are lists of channel IDs on which notifications
+            // should be repeated. The value may be null, in which case we should repeat all
+            // notifications. The latter requirement is needed to allow upgrading the setting from
+            // older versions.
             if (mReady.get() && selectedApplications.get().contains(notificationData.packageName)) {
                 // check waking conditions only if notification has been posted for the monitored application to prevent
                 // mRemainingRepeats overcome in case reminder is already stopped but new notification arrived from any not
@@ -655,7 +662,8 @@ public class ReminderNotificationListenerService extends AbstractReminderNotific
         NotificationData result = null;
         for (NotificationData item : getNotificationsData()) {
             if (TextUtils.equals(item.id, notificationData.id) &&
-                    TextUtils.equals(item.packageName, notificationData.packageName)) {
+                    TextUtils.equals(item.packageName, notificationData.packageName) &&
+                    TextUtils.equals(item.channelId, notificationData.channelId)) {
                 result = item;
                 break;
             }

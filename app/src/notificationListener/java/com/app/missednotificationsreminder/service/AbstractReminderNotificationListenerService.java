@@ -144,13 +144,14 @@ public abstract class AbstractReminderNotificationListenerService extends Notifi
         public ExtendedNotificationData(StatusBarNotification sbn) {
             this(notificationKey(sbn),
                     sbn.getPackageName(),
+                    sbn.getNotification().getChannelId(),
                     SystemClock.elapsedRealtime(),
                     sbn.getNotification().flags,
                     sbn.getNotification().when);
         }
 
-        public ExtendedNotificationData(String id, String packageName, long foundAtTime, int flags, long when) {
-            super(id, packageName, foundAtTime, flags);
+        public ExtendedNotificationData(String id, String packageName, String channelId, long foundAtTime, int flags, long when) {
+            super(id, packageName, channelId, foundAtTime, flags);
             this.when = when;
         }
 

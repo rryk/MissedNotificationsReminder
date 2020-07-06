@@ -46,6 +46,10 @@ public final class ApplicationsSelectionActivityModule {
 
     @Provides
     @Singleton ApplicationItemViewModel.ApplicationCheckedStateChangedListener provideApplicationsCheckedStateChangeListener(@SelectedApplications Preference<Set<String>> selectedApplications) {
+        // TODO: This code will need to be rewritten to support not only package names, but also
+        // optional channel IDs. We may as well simplify it and remove two observables and
+        // concatenation. Ultimately all the code below does is to either add a new package name
+        // if it was checked or remove it if it was not.
         return (applicationItem, checked) -> {
             Timber.d("Update selected application value %1$s to %2$b", applicationItem.packageName, checked);
             Observable<Pair<String, Set<String>>> selection = Observable

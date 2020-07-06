@@ -222,6 +222,7 @@ public final class DataModule {
     }
 
     @Provides @Singleton @SelectedApplications Preference<Set<String>> provideSelectedApplications(RxSharedPreferences prefs) {
+        // TODO: Write code that will adapt old setting with type StringSet into new Map<String, List<String>> type.
         return prefs.getStringSet(SELECTED_APPLICATIONS_PREF);
     }
 

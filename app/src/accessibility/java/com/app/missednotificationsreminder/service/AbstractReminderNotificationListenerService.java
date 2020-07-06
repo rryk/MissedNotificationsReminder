@@ -206,7 +206,7 @@ public abstract class AbstractReminderNotificationListenerService extends Access
         }
 
         public ExtendedNotificationData(String title, String packageName, long foundAtTime, int flags) {
-            super(title, packageName, foundAtTime, flags);
+            super(title, packageName, null, foundAtTime, flags);
         }
     }
 
